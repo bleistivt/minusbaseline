@@ -13,6 +13,9 @@ class MinusBaseLineThemeHooks implements Gdn_IPlugin {
 	}
 
 	public function Base_Render_Before($Sender) {
+		//tell the browser this is a mobile style
+		$Sender->Head->AddTag('meta', array('name' => 'viewport', 'content' => "width=device-width,minimum-scale=1.0,maximum-scale=1.0"));
+		
 		//add the hamburger menu
 		$Sender->AddAsset('Content', Anchor('n', Url('#'), 'Hamburger'), 'Hamburger');
 
@@ -42,12 +45,10 @@ class MinusBaseLineThemeHooks implements Gdn_IPlugin {
 
 	//disable admincheckboxes and option cogwheels
 	public function CategoriesController_Render_Before($Sender) {
-		$Sender->ShowOptions = false;
 		SaveToConfig('Vanilla.AdminCheckboxes.Use', false, false);
 	}
 
 	public function DiscussionsController_Render_Before($Sender) {
-		$Sender->ShowOptions = false;
 		SaveToConfig('Vanilla.AdminCheckboxes.Use', false, false);
 	}
 
