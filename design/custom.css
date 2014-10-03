@@ -1,12 +1,16 @@
 /* todo
-larger buttons & pagination
+pagination
 flyoutmenus
+bookmark
 */
+
+/*give the main row full width*/
 .Row {
 	margin: 0;
 	width: auto;
 	transition: margin .4s;
 }
+/*fix the panel and move it out of the visible area*/
 #Panel {
 	width: 300px;
 	position: fixed;
@@ -15,21 +19,20 @@ flyoutmenus
 	z-index: 10;
 	top: 0;
 	left: -310px;
-	border-right: 1px solid #ccc;
-	box-shadow: 0 0 5px rgba(0, 0, 0, .15);
-	transition: left .4s;
+	border-right: 1px solid rgba(0, 0, 0, .2);
+	box-shadow: 0 0 10px rgba(0, 0, 0, .15);
 	background: white;
+	transition: left .4s;
 }
+/*prevent a horizontal scrollbar from appearing*/
 body {
 	overflow-x: hidden;
 }
+/*slide the panel into the visible area*/
 body.HamburgerOpen #Panel {
 	left: 0;
 }
-#Body .ContentColumn {
-	margin: 0;
-	padding-top: 5px;
-}
+/*hide unneeded elements*/
 .BreadcrumbsWrapper,
 .DraftButton,
 .PreviewButton,
@@ -39,22 +42,44 @@ body.HamburgerOpen #Panel {
 .MeBox .Flyout:after {
 	display: none;
 }
+#Body .ContentColumn {
+	margin: 0;
+	padding-top: 5px;
+}
 #Frame {
 	transition: margin .4s;
 }
 body.HamburgerOpen #Frame {
 	margin: 0 -310px 0 310px;
 }
+/*make space in the Head for the menu*/
 body > #Frame > .Head {
 	padding-left: 60px;
 	margin-left: -10px;
 }
-#Head {
-	position: relative;
+/*increase size of menu links*/
+.SiteMenu a {
+	font-size: 16px;
 }
-h1, h2, h3, h4, div.User {
-	padding-left: 7px;
+/*add padding to element that would otherwise be directly at the edge of the screen*/
+h1, h2, h3, h4, .Profile div.User, .UserBox {
+	padding-left: 10px;
 }
+/*center the user info in the profile*/
+.Profile div.User {
+	text-align: center;
+}
+.Profile .PhotoWrapLarge {
+	width: 200px;
+	margin: 0 auto;
+}
+/*increase the size of the link to the full site*/
+#Foot .NoMobile a {
+	display: inline-block;
+	padding: 10px;
+	font-size: 16px;
+}
+/*the hamburger menu button*/
 a.Hamburger {
 	position: fixed;
 	top: 0;
@@ -62,12 +87,33 @@ a.Hamburger {
 	color: white;
 	text-decoration: none;
 	background: #38ABE3;
-	padding: 10px 5px 10px 20px;
+	padding: 10px 5px 10px 10px;
 	margin-left: -10px;
+	border-left: 10px solid rgba(0, 0, 0, 0.05);
 }
+/*hide the button when the menu is hidden too*/
+body.NoPanel .Hamburger,
+body.Entry .Hamburger,
+body.Conversations.add .Hamburger,
+body.Vanilla.Post .Hamburger {
+	display: none;
+}
+/* make the filtermenu links easier to click*/
+#Panel .FilterMenu li, .PanelInfo li {
+	padding: 0;
+}
+#Panel .FilterMenu li a, .PanelInfo li a {
+	padding: 5px 7px;
+	display: block;
+}
+/* add padding to elements in the panel*/
 .BoxNewDiscussion, .MeBox{
-	padding:0 7px;
+	padding: 0 7px;
 }
+#Panel .SiteSearch {
+	margin: 7px;
+}
+/*make the MeMenu flyout always take up the same space*/
 .MeBox .ToggleFlyout {
 	position: static;
 }
@@ -79,6 +125,7 @@ a.Hamburger {
 	border-radius: 0;
 	z-index: 9999;
 }
+/*make the MeMenu Buttons easier to touch*/
 .FlyoutButton, a:hover .FlyoutButton {
 	color: #999;
 }
@@ -91,6 +138,7 @@ a.Hamburger {
 	height: 26px;
 	text-align: center;
 }
+/*this was created with icomoon the original zip is in the fonts folder */
 @font-face {
 	font-family: 'minusbaseline';
 	src:url('fonts/minusbaseline.eot?vknwz2');
@@ -101,27 +149,32 @@ a.Hamburger {
 	font-weight: normal;
 	font-style: normal;
 }
-.SiteMenu a {
-	font-size: 16px;
-}
-.MeButton .Sprite, .Hamburger {
+/*use icon font for the MeMenu buttons and the cog wheels*/
+.MeButton .Sprite, .Hamburger, .OptionsTitle {
 	font-family: 'minusbaseline';
 	background: none;
 	font-size: 24px;
 }
-.SpOptions:before, .SpCog:before {
+/*MeButtons*/
+.MeButton .SpOptions:before, .OptionsTitle:before {
 	content: "\63";
 }
-.SpNotifications:before, .SpGlobe:before {
+.MeButton .SpNotifications:before {
 	content: "\67";
 }
-.SpInbox:before, .SpEnvelope:before {
+.MeButton .SpInbox:before {
 	content: "\65";
 }
-.SpBookmarks:before, .SpStar:before {
+.MeButton .SpBookmarks:before {
 	content: "\73";
 }
-
-/*.user:before {
-	content: "\75";
-}*/
+/*option cog wheels*/
+.OptionsTitle {
+	line-height: 1em;
+	margin: 0 10px;
+	height: 24px;
+}
+/*don't rely on :hover*/(
+.Item .OptionsTitle {
+    visibility: visible;
+}
