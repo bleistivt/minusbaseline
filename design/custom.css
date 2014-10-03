@@ -1,7 +1,5 @@
 /* todo
-pagination
 flyoutmenus
-bookmark
 */
 
 /*give the main row full width*/
@@ -27,6 +25,7 @@ bookmark
 /*prevent a horizontal scrollbar from appearing*/
 body {
 	overflow-x: hidden;
+	min-width: 360px;
 }
 /*slide the panel into the visible area*/
 body.HamburgerOpen #Panel {
@@ -62,7 +61,7 @@ body > #Frame > .Head {
 	font-size: 16px;
 }
 /*add padding to element that would otherwise be directly at the edge of the screen*/
-h1, h2, h3, h4, .Profile div.User, .UserBox {
+h1, h2, h3, h4, .Profile div.User, .UserBox, .Foot {
 	padding-left: 10px;
 }
 /*center the user info in the profile*/
@@ -107,7 +106,7 @@ body.Vanilla.Post .Hamburger {
 	display: block;
 }
 /* add padding to elements in the panel*/
-.BoxNewDiscussion, .MeBox{
+.BoxNewDiscussion, .MeBox, .GuestBox{
 	padding: 0 7px;
 }
 #Panel .SiteSearch {
@@ -149,8 +148,12 @@ body.Vanilla.Post .Hamburger {
 	font-weight: normal;
 	font-style: normal;
 }
-/*use icon font for the MeMenu buttons and the cog wheels*/
-.MeButton .Sprite, .Hamburger, .OptionsTitle {
+/*use icon font for the MeMenu buttons and the cogwheels*/
+.MeButton .Sprite,
+.Hamburger,
+.OptionsTitle,
+.NavButton > .SpEditProfile,
+a.Bookmark {
 	font-family: 'minusbaseline';
 	background: none;
 	font-size: 24px;
@@ -165,16 +168,99 @@ body.Vanilla.Post .Hamburger {
 .MeButton .SpInbox:before {
 	content: "\65";
 }
-.MeButton .SpBookmarks:before {
+.MeButton .SpBookmarks:before,
+a.Bookmark:before,
+a.Bookmarked:before,
+a.Bookmarking:before {
 	content: "\73";
 }
-/*option cog wheels*/
-.OptionsTitle {
-	line-height: 1em;
-	margin: 0 10px;
-	height: 24px;
+/*profile edit button*/
+.NavButton > .SpEditProfile {
+	line-height: 10px;
 }
-/*don't rely on :hover*/(
+.NavButton > .SpEditProfile:before {
+	content: "\75";
+	font-size: 16px;
+	color: black;
+}
+/*option cogwheels and bookmark button*/
+.OptionsTitle, a.Bookmark  {
+	text-indent:0;
+	line-height: 1em;
+	margin: 0 3px;
+	height: 24px;
+	width: 24px;
+}
+a.Bookmark {
+	color:transparent;
+}
+a.Bookmark:before {
+	color: rgba(0, 0, 0, .25);
+}
+a.Bookmarked:before, a.Bookmarking:before {
+	color: gold;
+}
+/*don't rely on :hover*/
 .Item .OptionsTitle {
     visibility: visible;
+}
+/*pagers*/
+.Pager, .MorePager {
+	width: auto;
+	font-size: 16px;
+	line-height: 35px;
+	float:none;
+	margin:7px;
+}
+.BeforeCommentHeading {
+    float:none;
+}
+/*this needs to be removed as it adds an empty line on top of the pager*/
+.PageControls .PagerNub {
+	display: none;
+}
+/*hide most of the links...*/
+.Pager a, .Pager span {
+	margin: 0;
+	display: none;
+}
+/*...and only display the current, first, last, previous and next links*/
+.Pager .Highlight,
+.Pager .Previous,
+.Pager .Next,
+.Pager .FirstPage,
+.Pager .LastPage {
+	display: table-cell;
+	width: 1%;
+}
+.Pager a, .Pager span, .MorePager a {
+	text-align: center;
+	background: #F3F3F3;
+	border: solid #ddd;
+	border-width: 1px 0 1px 1px;
+}
+ .Pager a:hover {
+	background: #eee;
+}
+.Pager a.Highlight {
+	background: white;
+}
+.Pager .Previous {
+	border-radius: 2px 0 0 2px;
+}
+.Pager .Next {
+	border-right-width: 1px;
+	border-radius: 0 2px 2px 0;
+}
+.Pager.PrevNextPager .Previous,
+.Pager.PrevNextPager .Next {
+  display: block;
+  text-align: center;
+  width: 48%;
+  float:left;
+}
+.MorePager a {
+  display: block;
+  margin: 3px;
+  border-radius: 2px;
 }
