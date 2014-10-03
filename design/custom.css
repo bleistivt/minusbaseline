@@ -73,6 +73,17 @@ h1, h2, h3, h4, .Profile div.User, .UserBox, .Foot, .Empty, .P.PageDescription {
 	width: 200px;
 	margin: 0 auto;
 }
+
+/*hide the flyouts as they are replaced by a selectbox*/ 
+.ToggleFlyout ul.MenuItems {
+	display: none !important;
+}
+
+.ToggleFlyout {
+	display: inline-block;
+	overflow: hidden;
+}
+
 /*increase the size of the link to the full site*/
 #Foot .NoMobile a {
 	display: inline-block;
@@ -98,12 +109,20 @@ a.Hamburger {
 body.HamburgerOpen a.Hamburger {
 	left: 310px;
 }
-/*hide the button when the menu is hidden too*/
+/*hide the button when the menu is hidden too...*/
 body.NoPanel .Hamburger,
 body.Entry .Hamburger,
 body.Conversations.add .Hamburger,
 body.Vanilla.Post .Hamburger {
 	display: none;
+}
+
+.NoPanel > #Frame > .Head,
+.Entry > #Frame > .Head,
+.Conversations.add > #Frame > .Head,
+.Vanilla.Post > #Frame > .Head {
+	padding-left: 5px;
+	margin-left: 0;
 }
 /* make the filtermenu links easier to click*/
 #Panel .FilterMenu li, .PanelInfo li {
@@ -115,7 +134,7 @@ body.Vanilla.Post .Hamburger {
 	display: block;
 }
 /* add padding to elements in the panel*/
-.BoxNewDiscussion, .MeBox, .GuestBox {
+.BoxNewDiscussion, .MeBox, .GuestBox, .CategoryFilter {
 	padding: 0 7px;
 }
 
@@ -135,6 +154,16 @@ body.Vanilla.Post .Hamburger {
 	border-radius: 0;
 	z-index: 9999;
 }
+/*increase the size of the flyout items*/
+.MenuItems a, .MenuItems a:link {
+	line-height: 2em;
+	font-size: 1.2em;
+}
+
+.MenuItems a:hover {
+	background-color: #38ABE3 !important;
+}
+
 /*make the MeMenu Buttons easier to touch*/
 .FlyoutButton, a:hover .FlyoutButton {
 	color: #999;
@@ -245,7 +274,8 @@ a.Bookmarked:before, a.Bookmarking:before {
 	margin: 0;
 	display: none;
 }
-/*...and only display the current, first, last, previous and next links*/
+/*...and only display the current, first, last, previous and next links
+display: table-cell; makes the links fill up equal space */
 .Pager .Highlight,
 .Pager .Previous,
 .Pager .Next,

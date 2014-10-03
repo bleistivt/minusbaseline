@@ -43,7 +43,7 @@ class MinusBaseLineThemeHooks implements Gdn_IPlugin {
 		$Sender->AddAsset('Foot', $NoMobile, 'NoMobile');
 	}
 
-	//disable admincheckboxes and option cogwheels
+	//disable admincheckboxes
 	public function CategoriesController_Render_Before($Sender) {
 		SaveToConfig('Vanilla.AdminCheckboxes.Use', false, false);
 	}
