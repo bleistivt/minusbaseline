@@ -1,0 +1,127 @@
+/* todo
+larger buttons & pagination
+flyoutmenus
+*/
+.Row {
+	margin: 0;
+	width: auto;
+	transition: margin .4s;
+}
+#Panel {
+	width: 300px;
+	position: fixed;
+	height: 100%;
+	overflow-y: auto;
+	z-index: 10;
+	top: 0;
+	left: -310px;
+	border-right: 1px solid #ccc;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+	transition: left .4s;
+	background: white;
+}
+body {
+	overflow-x: hidden;
+}
+body.HamburgerOpen #Panel {
+	left: 0;
+}
+#Body .ContentColumn {
+	margin: 0;
+	padding-top: 5px;
+}
+.BreadcrumbsWrapper,
+.DraftButton,
+.PreviewButton,
+.Profile #Panel .PhotoWrap,
+#Head .SiteSearch,
+.MeBox .Flyout:before,
+.MeBox .Flyout:after {
+	display: none;
+}
+#Frame {
+	transition: margin .4s;
+}
+body.HamburgerOpen #Frame {
+	margin: 0 -310px 0 310px;
+}
+body > #Frame > .Head {
+	padding-left: 60px;
+	margin-left: -10px;
+}
+#Head {
+	position: relative;
+}
+h1, h2, h3, h4, div.User {
+	padding-left: 7px;
+}
+a.Hamburger {
+	position: fixed;
+	top: 0;
+	font-size: 32px;
+	color: white;
+	text-decoration: none;
+	background: #38ABE3;
+	padding: 10px 5px 10px 20px;
+	margin-left: -10px;
+}
+.BoxNewDiscussion, .MeBox{
+	padding:0 7px;
+}
+.MeBox .ToggleFlyout {
+	position: static;
+}
+.MeBox .Flyout{
+	width: 100%;
+	top: 70px;
+	left: 0;
+	border-width: 1px 0;
+	border-radius: 0;
+	z-index: 9999;
+}
+.FlyoutButton, a:hover .FlyoutButton {
+	color: #999;
+}
+.ToggleFlyout.Open .FlyoutButton {
+	background: #38ABE3;
+	color: white;
+}
+.MeButton .Sprite16 {
+	width: 36px;
+	height: 26px;
+	text-align: center;
+}
+@font-face {
+	font-family: 'minusbaseline';
+	src:url('fonts/minusbaseline.eot?vknwz2');
+	src:url('fonts/minusbaseline.eot?#iefixvknwz2') format('embedded-opentype'),
+		url('fonts/minusbaseline.woff?vknwz2') format('woff'),
+		url('fonts/minusbaseline.ttf?vknwz2') format('truetype'),
+		url('fonts/minusbaseline.svg?vknwz2#minusbaseline') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.SiteMenu a {
+	font-size: 16px;
+}
+.MeButton .Sprite, .Hamburger {
+	font-family: 'minusbaseline';
+	background: none;
+	font-size: 24px;
+}
+.SpOptions:before, .SpCog:before {
+	content: "\63";
+}
+.SpNotifications:before, .SpGlobe:before {
+	content: "\67";
+}
+.SpInbox:before, .SpEnvelope:before {
+	content: "\65";
+}
+.SpBookmarks:before, .SpStar:before {
+	content: "\73";
+}
+
+/*.user:before {
+	content: "\75";
+}*/
