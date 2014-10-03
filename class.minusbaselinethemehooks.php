@@ -19,7 +19,6 @@ class MinusBaseLineThemeHooks implements Gdn_IPlugin {
 		//add the hamburger menu
 		$Sender->AddAsset('Content', Anchor('n', Url('#'), 'Hamburger'), 'Hamburger');
 
-		//the js file contains the code for the menu and a better way to make discussion clickable
 		$Sender->AddJsFile('minusbaseline.js');
 
 		//add the searchbox to the panel
