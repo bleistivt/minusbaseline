@@ -2,22 +2,20 @@
 .Row {
 	margin: 0;
 	width: auto;
-	transition: margin .4s;
 }
 /*fix the panel and move it out of the visible area*/
 #Panel {
 	width: 300px;
 	position: fixed;
-	height: 100%;
-	padding-bottom: 100px;
+	height: 120%;
 	overflow-y: auto;
 	z-index: 10;
 	top: 0;
 	left: -310px;
 	border-right: 1px solid rgba(0, 0, 0, .4);
-	box-shadow: 0 0 10px rgba(0, 0, 0, .15);
 	background: white;
 	transition: left .4s;
+	backface-visibility: hidden;
 }
 /*prevent a horizontal scrollbar from appearing*/
 body {
@@ -46,10 +44,11 @@ body.HamburgerOpen #Panel {
 /*make the whole page slide to the right*/
 #Frame {
 	transition: margin .4s;
+	width: 100%;
 }
 
 body.HamburgerOpen #Frame {
-	margin: 0 -310px 0 310px;
+	margin: 0 0 0 310px;
 }
 /*make space in the Head for the menu*/
 body > #Frame > .Head {
@@ -134,8 +133,13 @@ body.Vanilla.Post .Hamburger {
 	display: block;
 }
 /* add padding to elements in the panel*/
-.BoxNewDiscussion, .MeBox, .GuestBox, .CategoryFilter {
+.BoxButtons, #Panel .AddPeople, .MeBox, .GuestBox, .CategoryFilter {
 	padding: 0 7px;
+}
+
+#Panel > .BigButton {
+	margin-left: 7px;
+	margin-right: 7px;
 }
 
 #Panel .SiteSearch {
