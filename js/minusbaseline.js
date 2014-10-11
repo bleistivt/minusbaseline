@@ -25,6 +25,7 @@ jQuery(function($) {
 	
 	var change = function() {
 		$('option:selected', this).data('a').click();
+		$(this).val(null);
 	};
 	
 	var flyouts = $('.ToggleFlyout');
