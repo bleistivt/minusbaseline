@@ -7,14 +7,15 @@
 #Panel {
 	width: 300px;
 	position: fixed;
-	height: 120%;
+	height: 100%;
+	padding-bottom: 60px;
 	overflow-y: auto;
 	z-index: 10;
 	top: 0;
 	left: -310px;
 	border-right: 1px solid rgba(0, 0, 0, .4);
 	background: white;
-	transition: left .4s;
+	transition: left .3s;
 	backface-visibility: hidden;
 }
 /*prevent a horizontal scrollbar from appearing*/
@@ -43,7 +44,7 @@ body.HamburgerOpen #Panel {
 }
 /*make the whole page slide to the right*/
 #Frame {
-	transition: margin .4s;
+	transition: margin .3s;
 	width: 100%;
 }
 
@@ -102,7 +103,7 @@ a.Hamburger {
 	padding: 10px 5px 10px 10px;
 	margin-left: -10px;
 	border-left: 10px solid rgba(0, 0, 0, .05);
-	transition: left .4s;
+	transition: left .3s;
 }
 
 body.HamburgerOpen a.Hamburger {
@@ -183,7 +184,7 @@ body.Vanilla.Post .Hamburger {
 	height: 26px;
 	text-align: center;
 }
-/*this was created with icomoon the original zip is in the fonts folder */
+/*this was created with icomoon, the original zip is in the fonts folder */
 @font-face {
 	font-family: 'minusbaseline';
 	src:url('fonts/minusbaseline.eot?vknwz2');
@@ -253,6 +254,34 @@ a.Bookmark:before {
 
 a.Bookmarked:before, a.Bookmarking:before {
 	color: gold;
+}
+/*discussionmeta*/
+.MItem {
+	margin: 0 3px;
+}
+
+.MItem:before {
+	font-family: 'minusbaseline';
+	font-size: 14px;
+}
+
+.MItem.ViewCount, .MItem.CommentCount, .MItem.LastCommentBy, .Meta-Discussion .MItem.Category {
+	font-size: 0;
+}
+
+.MItem.ViewCount .Number,
+.MItem.CommentCount .Number,
+.MItem.LastCommentBy a,
+.MItem.LastCommentDate {
+	font-size: 12px;
+}
+
+.MItem.ViewCount:before {
+	content: "\76\00a0";
+}
+
+.MItem.CommentCount:before {
+	content: "\62\00a0";
 }
 /*don't rely on :hover*/
 .Item .OptionsTitle {
