@@ -20,9 +20,7 @@ jQuery(function($) {
 		}
 	});
 	
-	//create select lists for flyout menus
-	var options = gdn.definition('MinusBaseline.Options');
-	
+	//create select lists for flyout menus	
 	var change = function() {
 		$('option:selected', this).data('a').click();
 		$(this).val(null);
