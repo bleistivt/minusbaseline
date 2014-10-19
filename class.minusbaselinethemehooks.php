@@ -19,8 +19,6 @@ class MinusBaseLineThemeHooks implements Gdn_IPlugin {
 		//add the hamburger menu
 		$Sender->AddAsset('Content', Anchor('n', Url('#'), 'Hamburger'), 'Hamburger');
 
-		$Sender->AddJsFile('minusbaseline.js');
-
 		//add the searchbox to the panel
 		//copied from library/vendors/SmartyPlugins/function.searchbox.php
 		$Form = Gdn::Factory('Form');
