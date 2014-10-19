@@ -96,6 +96,7 @@ a.Hamburger {
 	backface-visibility: hidden;
 	top: 0;
 	left: 0;
+	z-index: 201;
 	font-size: 32px;
 	color: white;
 	text-decoration: none;

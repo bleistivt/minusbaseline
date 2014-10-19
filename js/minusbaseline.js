@@ -1,9 +1,19 @@
 jQuery(function($) {
-
+	
+	var body = $('body');
+	
 	//toggle the menuopen class when the hamburger is clicked
 	$('a.Hamburger').click(function(e) {
 		e.preventDefault();
-		$('body').toggleClass('HamburgerOpen');
+		e.stopPropagation();
+		body.toggleClass('HamburgerOpen');
+	});
+	
+	$('#Content, #Head').on('mousedown touchstart', function(e) {
+		if (body.hasClass('HamburgerOpen')) {
+			e.preventDefault();
+			body.removeClass('HamburgerOpen');
+		}
 	});
 	
 	//make the whole area of DiscussionList Items clickable
