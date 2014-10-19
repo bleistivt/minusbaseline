@@ -1,7 +1,9 @@
 jQuery(function($) {
 
-	var body = $('body');
-	var pushstate = window.history && window.history.pushState;
+	var body = $('body'),
+		pushstate = window.history && window.history.pushState,
+		href = window.location.href;
+	
 
 	//toggle the menuopen class when the hamburger is clicked
 	$('a.Hamburger').click(function(e) {
@@ -15,7 +17,8 @@ jQuery(function($) {
 		} else {
 			body.addClass('HamburgerOpen');
 			if (pushstate) {
-				window.history.pushState('menu', null, '#menu');
+				href = window.location.href;
+				window.history.pushState({}, '', '#menu');
 			}
 		}
 	});
@@ -39,6 +42,13 @@ jQuery(function($) {
 			}
 		});
 	}
+	
+	//clear up the history when a link was clicked while the menu is open
+	$(window).on('beforeunload', function() {
+		if (body.hasClass('HamburgerOpen')) {
+			window.history.replaceState({}, '', href);
+		}
+	});
 
 	//make the whole area of DiscussionList Items clickable
 	$('ul.DataList.Discussions, ul.DataList.Itemlisten').on('click', 'li.Item', function (e) {
