@@ -67,7 +67,7 @@ jQuery(function($) {
 	//create select lists for flyout menus
 	var change = function() {
 		$('option:selected', this).data('a').click();
-		$(this).val(null);
+		$(this).prop('selectedIndex', -1);
 	};
 
 	var flyouts = $('.ToggleFlyout');
@@ -88,7 +88,7 @@ jQuery(function($) {
 				.text(items[j].text)
 			);
 		}
-		select.val(null);
+		select.prop('selectedIndex', -1);
 		//simulate a click on change
 		select.change(change);
 	}
