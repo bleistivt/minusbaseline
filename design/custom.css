@@ -21,7 +21,7 @@
 /*prevent a horizontal scrollbar from appearing*/
 body {
 	overflow-x: hidden;
-	min-width: 360px;
+	min-width: 320px;
 }
 /*slide the panel into the visible area*/
 body.HamburgerOpen #Panel {
