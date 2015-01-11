@@ -3,7 +3,7 @@
 $ThemeInfo['minusbaseline'] = array(
 	'Name' => 'MinusBaseline',
 	'Description' => 'The default theme with a few customizations to work better on mobile devices.',
-	'Version' => '0.4',
+	'Version' => '0.5',
 	'Author' => 'Bleistivt',
 	'AuthorUrl' => 'http://bleistivt.net',
 	'IsMobile' => true
