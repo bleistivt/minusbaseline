@@ -10,6 +10,9 @@ class MinusBaseLineThemeHooks implements Gdn_IPlugin {
 			Gdn::PluginManager()->RemoveMobileUnfriendlyPlugins();
 		}
 		SaveToConfig('Garden.Format.EmbedSize', '240x135', false);
+
+		//the table discussions layout takes up too much space on small screens
+		SaveToConfig('Vanilla.Discussions.Layout', 'modern', false);
 	}
 
 	public function Base_Render_Before($Sender) {
