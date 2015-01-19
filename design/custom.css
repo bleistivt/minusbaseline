@@ -286,7 +286,7 @@ a.Bookmarked:before, a.Bookmarking:before {
 }
 /*don't rely on :hover*/
 .Item .OptionsTitle {
-    visibility: visible;
+	visibility: visible;
 }
 /*pagers*/
 .Pager, .MorePager {
@@ -297,7 +297,7 @@ a.Bookmarked:before, a.Bookmarking:before {
 	margin:7px;
 }
 .BeforeCommentHeading {
-    float:none;
+	float:none;
 }
 /*this needs to be removed as it adds an empty line on top of the pager*/
 .PageControls .PagerNub {
@@ -352,3 +352,34 @@ display: table-cell; makes the links fill up equal space */
 	margin: 3px;
 	border-radius: 2px;
 }
+
+/*modification to show the menu on the right side, uncomment to use*/
+
+/*
+#Panel {
+	left: auto;
+	right: -310px;
+	border-left: 1px solid rgba(0,0,0,.4);
+	transition: right .3s;
+	z-index: 202;
+}
+body.HamburgerOpen #Panel, a.Hamburger {
+	left: auto;
+	right: 0;
+}
+body.HamburgerOpen #Frame {
+	margin: 0 0 0 -300px;
+}
+a.Hamburger {
+	border-left: none;
+	transition: right .3s;
+}
+body.HamburgerOpen a.Hamburger {
+	left: auto;
+	right: 300px;
+}
+body > #Frame > .Head {
+	padding-left: 3px;
+	margin-left: 0;
+}
+*/
