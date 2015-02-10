@@ -3,7 +3,7 @@ jQuery(function($) {
 	var body = $('body'),
 		pushstate = window.history && window.history.pushState,
 		href = window.location.href;
-	
+
 
 	//toggle the menuopen class when the hamburger is clicked
 	$('a.Hamburger').click(function(e) {
@@ -42,7 +42,7 @@ jQuery(function($) {
 			}
 		});
 	}
-	
+
 	//clear up the history when a link was clicked while the menu is open
 	$(window).on('beforeunload', function() {
 		if (body.hasClass('HamburgerOpen')) {
@@ -70,27 +70,38 @@ jQuery(function($) {
 		$(this).prop('selectedIndex', -1);
 	};
 
-	var flyouts = $('.ToggleFlyout');
-	for (var i = 0; i < flyouts.length; i++) {
-		//grab all the links
-		var items = $('ul.MenuItems a', flyouts[i]);
-		//create a selectlist
-		var select = $('<select/>').css({
-				position: 'absolute',
-				left: 0,
-				opacity: 0
-			}).appendTo(flyouts[i]);
-		//extract the text and the url
-		for (var j = 0; j < items.length; j++) {
-			select.append(
-				$('<option/>')
-				.data('a', items[j])
-				.text(items[j].text)
-			);
+	var transformFlyouts = function() {
+		var flyouts = $('.ToggleFlyout');
+		for (var i = 0; i < flyouts.length; i++) {
+			//skip already transformed flyouts
+			flyouts[i] = $(flyouts[i]);
+			if (flyouts[i].data('hasselectlist')) {
+				continue;
+			}
+			flyouts[i].data('hasselectlist', true);
+			//grab all the links
+			var items = $('ul.MenuItems a', flyouts[i]);
+			//create a selectlist
+			var select = $('<select/>').css({
+					position: 'absolute',
+					left: 0,
+					opacity: 0
+				}).appendTo(flyouts[i]);
+			//extract the text and the url
+			for (var j = 0; j < items.length; j++) {
+				select.append(
+					$('<option/>')
+					.data('a', items[j])
+					.text(items[j].text)
+				);
+			}
+			select.prop('selectedIndex', -1);
+			//simulate a click on change
+			select.change(change);
 		}
-		select.prop('selectedIndex', -1);
-		//simulate a click on change
-		select.change(change);
-	}
+	};
+	transformFlyouts();
+
+	$(document).on('CommentAdded', transformFlyouts);
 
 });
