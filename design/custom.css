@@ -357,16 +357,17 @@ display: table-cell; makes the links fill up equal space */
 	border-left: 1px solid rgba(0,0,0,.4);
 	z-index: 202;
 }
+
 a.Hamburger {
 	left: auto;
 	right: -10px;
+	border-width: 0 10px 0 0;
 }
+
 body.HamburgerOpen #Frame {
 	transform: translate(-300px, 0);
 }
-a.Hamburger {
-	border-width: 0 10px 0 0;
-}
+
 body > #Frame > .Head {
 	padding-left: 10px;
 	margin-left: 0;
