@@ -72,6 +72,10 @@ h1, h2, h3, h4, .Profile div.User, .UserBox, .Foot, .Empty, .P.PageDescription {
 	margin: 0 auto;
 }
 
+.ProfileOptions{
+	margin-right:10px;
+}
+
 /*hide the flyouts as they are replaced by a selectbox*/ 
 .ToggleFlyout ul.MenuItems {
 	display: none !important;
