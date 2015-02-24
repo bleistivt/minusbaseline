@@ -4,48 +4,78 @@
 jQuery(function ($) {
     'use strict';
 
-    var body = $('body'),
+    var $window = $(window),
+        body = $('body'),
+        menu = $('a.Hamburger'),
         pushstate = window.history && window.history.pushState,
         url = window.location.href,
+        closeMenu,
         change,
         transformFlyouts;
 
+    //remove the menu hash on the initial pageload
+    if (pushstate && window.location.hash === '#menu') {
+        url = window.location.href.split('#')[0];
+        window.history.replaceState({}, '', url);
+    }
 
     //toggle the menuopen class when the hamburger is clicked
-    $('a.Hamburger').click(function (e) {
+    menu.click(function (e) {
         e.preventDefault();
         e.stopPropagation();
         if (body.hasClass('HamburgerOpen')) {
-            body.removeClass('HamburgerOpen');
-            if (pushstate) {
-                window.history.back();
-            }
+            closeMenu();
         } else {
+            var scrollTop = $window.scrollTop();
+            menu.css({
+                position: 'absolute',
+                top: scrollTop
+            });
+            $('#Panel').css({
+                top: scrollTop,
+                height: $window.height()
+            });
             body.addClass('HamburgerOpen');
+
             if (pushstate) {
                 url = window.location.href;
                 window.history.pushState({}, '', '#menu');
+
+                //this prevents a chrome bug where the page is scrolled to the top after pushState
+                //see https://code.google.com/p/chromium/issues/detail?id=399971
+                setTimeout(function () {
+                    if ($window.scrollTop() !== scrollTop) {
+                        $window.scrollTop(scrollTop);
+                    }
+                }, 150);
             }
         }
     });
 
     //close the menu when the user tries to interact with the rest of the page
-    $('#Content, #Head').on('mousedown touchstart', function (e) {
+    closeMenu = function (e, back) {
         if (body.hasClass('HamburgerOpen')) {
-            e.preventDefault();
+            e = e && e.preventDefault();
+            var transitionend = function () {
+                menu.css({position: 'fixed', top: 0});
+            };
+            setTimeout(transitionend, 450);
+            $window.one('transitionend', transitionend);
             body.removeClass('HamburgerOpen');
-            if (pushstate) {
+
+            if (pushstate && back !== false) {
                 window.history.back();
             }
         }
-    });
+    };
+
+    $('#Content, #Head').on('touchstart', closeMenu);
+    $window.on('orientationchange', closeMenu);
 
     //make the back button close the menu
     if (pushstate) {
         $(window).on('popstate', function () {
-            if (body.hasClass('HamburgerOpen')) {
-                body.removeClass('HamburgerOpen');
-            }
+            closeMenu(null, false);
         });
     }
 
