@@ -102,6 +102,6 @@ jQuery(function($) {
     };
     transformFlyouts();
 
-    $(document).on('CommentAdded', transformFlyouts);
+    $(document).on('CommentAdded CommentPagingComplete', transformFlyouts);
 
 });
