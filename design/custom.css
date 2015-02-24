@@ -6,12 +6,11 @@
 /*fix the panel and move it out of the visible area*/
 #Panel {
 	width: 300px;
-	position: fixed;
+	position: absolute;
 	height: 100%;
 	padding-bottom: 60px;
 	overflow-y: auto;
 	z-index: 10;
-	top: 0;
 	left: -310px;
 	border-right: 1px solid rgba(0, 0, 0, .4);
 	background: white;
@@ -22,6 +21,10 @@
 body {
 	overflow-x: hidden;
 	min-width: 320px;
+}
+
+body.HamburgerOpen {
+	overflow: hidden;
 }
 /*hide unneeded elements*/
 .BreadcrumbsWrapper,
@@ -99,7 +102,8 @@ a.Hamburger {
 	background: #38ABE3;
 	padding: 10px 5px 10px 10px;
 	margin-left: -10px;
-	border-left: 10px solid rgba(0, 0, 0, .05);
+	border: solid rgba(0, 0, 0, .05);
+	border-width: 0 0 0 10px;
 	transition: transform .3s;
 }
 /*hide the button when the menu is hidden too...*/
@@ -356,13 +360,13 @@ display: table-cell; makes the links fill up equal space */
 }
 a.Hamburger {
 	left: auto;
-	right: 0;
+	right: -10px;
 }
 body.HamburgerOpen #Frame {
 	transform: translate(-300px, 0);
 }
 a.Hamburger {
-	border-left: none;
+	border-width: 0 10px 0 0;
 }
 body > #Frame > .Head {
 	padding-left: 3px;
