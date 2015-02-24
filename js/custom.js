@@ -109,7 +109,7 @@ jQuery(function ($) {
     transformFlyouts = function () {
         var flyouts, i, items, select, j;
 
-        flyouts = $('.ToggleFlyout');
+        flyouts = $('.ToggleFlyout:not(.MeMenu .ToggleFlyout)');
         for (i = 0; i < flyouts.length; i += 1) {
             //skip already transformed flyouts
             flyouts[i] = $(flyouts[i]);
