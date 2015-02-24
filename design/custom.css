@@ -14,7 +14,6 @@
 	left: -310px;
 	border-right: 1px solid rgba(0, 0, 0, .4);
 	background: white;
-	transition: transform .3s;
 	backface-visibility: hidden;
 }
 /*prevent a horizontal scrollbar from appearing*/
