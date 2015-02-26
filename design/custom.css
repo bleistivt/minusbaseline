@@ -350,6 +350,7 @@ display: table-cell; makes the links fill up equal space */
 	display: block;
 	margin: 3px;
 	border-radius: 2px;
+	border-width: 1px;
 }
 
 /*modification to show the menu on the right side, uncomment to use*/
