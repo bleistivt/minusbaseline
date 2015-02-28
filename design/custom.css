@@ -54,6 +54,29 @@ body > #Frame > .Head {
 	padding-left: 60px;
 	margin-left: -10px;
 }
+/*move the panel to the right*/
+.PanelRight #Panel {
+	left: auto;
+	right: -310px;
+	border-left: 1px solid rgba(0, 0, 0, .4);
+	z-index: 202;
+}
+
+.PanelRight a.Hamburger {
+	left: auto;
+	right: -10px;
+	border-width: 0 10px 0 0;
+}
+
+body.PanelRight.HamburgerOpen #Frame {
+	transform: translate(-300px, 0);
+}
+
+body.PanelRight > #Frame > .Head {
+	width: 100%;
+	padding-left: 10px;
+	margin-left: 0;
+}
 /*increase size of menu links*/
 .SiteMenu a {
 	font-size: 16px;
@@ -352,30 +375,3 @@ display: table-cell; makes the links fill up equal space */
 	border-radius: 2px;
 	border-width: 1px;
 }
-
-/*modification to show the menu on the right side, uncomment to use*/
-
-/*
-#Panel {
-	left: auto;
-	right: -310px;
-	border-left: 1px solid rgba(0,0,0,.4);
-	z-index: 202;
-}
-
-a.Hamburger {
-	left: auto;
-	right: -10px;
-	border-width: 0 10px 0 0;
-}
-
-body.HamburgerOpen #Frame {
-	transform: translate(-300px, 0);
-}
-
-body > #Frame > .Head {
-	width: 100%;
-	padding-left: 10px;
-	margin-left: 0;
-}
-*/
