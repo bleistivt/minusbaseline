@@ -374,6 +374,7 @@ body.HamburgerOpen #Frame {
 }
 
 body > #Frame > .Head {
+	width: 100%;
 	padding-left: 10px;
 	margin-left: 0;
 }
