@@ -1,6 +1,6 @@
 <?php if (!defined('APPLICATION')) exit();
 
-class MinusBaseLineThemeHooks implements Gdn_IPlugin {
+class MinusBaselineThemeHooks implements Gdn_IPlugin {
 
     public function Setup() {}
 
@@ -20,6 +20,9 @@ class MinusBaseLineThemeHooks implements Gdn_IPlugin {
 
         //tell the browser this is a mobile style
         $Sender->Head->AddTag('meta', array('name' => 'viewport', 'content' => "width=device-width,minimum-scale=1.0,maximum-scale=1.0"));
+
+        //position of the panel
+        $Sender->CssClass .= C('MinusBaseline.Panel.Left', false) ? ' PanelLeft' : ' PanelRight';
 
         //add the hamburger menu
         $Sender->AddAsset('Content', Anchor('n', Url('#'), 'Hamburger'), 'Hamburger');
