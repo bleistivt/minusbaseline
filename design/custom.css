@@ -15,6 +15,7 @@
 	border-right: 1px solid rgba(0, 0, 0, .4);
 	background: white;
 	backface-visibility: hidden;
+    box-sizing: border-box;
 }
 /*prevent a horizontal scrollbar from appearing*/
 body {
@@ -69,7 +70,7 @@ body > #Frame > .Head {
 }
 
 body.PanelRight.HamburgerOpen #Frame {
-	transform: translate(-300px, 0);
+	transform: translate(-310px, 0);
 }
 
 body.PanelRight > #Frame > .Head {
