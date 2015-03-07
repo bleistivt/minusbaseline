@@ -36,6 +36,7 @@ jQuery(function ($) {
                 height: $window.height()
             });
             body.addClass('HamburgerOpen');
+            $window.scrollLeft(0);
 
             if (pushstate) {
                 url = window.location.href;
@@ -62,12 +63,12 @@ jQuery(function ($) {
             setTimeout(transitionend, 450);
             $window.one('transitionend', transitionend);
             body.removeClass('HamburgerOpen');
-            $window.scrollLeft(0);
 
             if (pushstate && back !== false) {
                 window.history.back();
             }
         }
+        $window.scrollLeft(0);
     };
 
     $('#Content, #Head').on('touchstart', closeMenu);
