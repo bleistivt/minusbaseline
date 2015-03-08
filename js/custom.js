@@ -137,7 +137,7 @@ jQuery(function ($) {
                 }).appendTo(flyouts[i]);
 
                 //add a dummy option for old stock android browser
-                if (!stockAndroid) {
+                if (stockAndroid) {
                     select.append('<option>...</option>');
                 }
 
