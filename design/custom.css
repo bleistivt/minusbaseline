@@ -59,6 +59,7 @@ body > #Frame > .Head {
 .PanelRight #Panel {
 	left: auto;
 	right: -310px;
+	border-right: none;
 	border-left: 1px solid rgba(0, 0, 0, .4);
 	z-index: 202;
 }
@@ -89,6 +90,10 @@ h1, h2, h3, h4, .Profile div.User, .UserBox, .Foot, .Empty, .P.PageDescription {
 /*center the user info in the profile*/
 .Profile div.User {
 	text-align: center;
+}
+
+.Profile div.User h1.H {
+	text-align: left;
 }
 
 .Profile .PhotoWrapLarge {
