@@ -8,6 +8,10 @@ jQuery(function ($) {
         body = $('body'),
         menu = $('a.Hamburger'),
         pushstate = window.history && window.history.pushState,
+        //http://stackoverflow.com/a/17961266
+        isAndroid = navigator.userAgent.indexOf('Android') >= 0,
+        webkitVer = parseInt((/WebKit\/([0-9]+)/.exec(navigator.appVersion) || 0)[1], 10) || undefined,
+        stockAndroid = isAndroid && webkitVer <= 534 && navigator.vendor.indexOf('Google') === 0,
         url = window.location.href,
         closeMenu,
         change,
@@ -104,7 +108,10 @@ jQuery(function ($) {
 
     //create select lists for flyout menus
     change = function () {
-        $('option:selected', this).data('a').click();
+        var link = $('option:selected', this).data('a');
+        if (link) {
+            link.click();
+        }
         this.selectedIndex = -1;
     };
 
@@ -128,6 +135,11 @@ jQuery(function ($) {
                     left: 0,
                     opacity: 0
                 }).appendTo(flyouts[i]);
+
+                //add a dummy option for old stock android browser
+                if (!stockAndroid) {
+                    select.append('<option>...</option>');
+                }
 
                 //extract the text and the url
                 for (j = 0; j < items.length; j += 1) {
