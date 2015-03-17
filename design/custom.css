@@ -45,6 +45,8 @@ body.HamburgerOpen {
 #Frame {
 	transition: transform .3s;
 	width: 100%;
+	position: relative;
+	overflow: hidden;
 }
 
 body.HamburgerOpen #Frame {
