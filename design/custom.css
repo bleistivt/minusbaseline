@@ -5,6 +5,7 @@
 }
 /*fix the panel and move it out of the visible area*/
 #Panel {
+	display: none;
 	width: 300px;
 	position: absolute;
 	height: 100%;
@@ -49,8 +50,6 @@ body.HamburgerOpen {
 	-webkit-transition: -webkit-transform .3s;
 	transition: transform .3s;
 	width: 100%;
-	position: relative;
-	overflow: hidden;
 }
 
 body.HamburgerOpen #Frame {
