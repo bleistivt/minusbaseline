@@ -14,8 +14,10 @@
 	left: -310px;
 	border-right: 1px solid rgba(0, 0, 0, .4);
 	background: white;
-	backface-visibility: hidden;
 	box-sizing: border-box;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transform: translateZ(0);
 }
 /*prevent a horizontal scrollbar from appearing*/
 body {
@@ -43,6 +45,7 @@ body.HamburgerOpen {
 }
 /*make the whole page slide to the right*/
 #Frame {
+	-webkit-transition: -webkit-transform .3s;
 	transition: transform .3s;
 	width: 100%;
 	position: relative;
@@ -50,6 +53,7 @@ body.HamburgerOpen {
 }
 
 body.HamburgerOpen #Frame {
+	-webkit-transform: translate(310px, 0px);
 	transform: translate(310px, 0);
 }
 /*make space in the Head for the menu*/
@@ -73,6 +77,7 @@ body > #Frame > .Head {
 }
 
 body.PanelRight.HamburgerOpen #Frame {
+	-webkit-transform: translate(-310px, 0px);
 	transform: translate(-310px, 0);
 }
 
@@ -138,6 +143,7 @@ a.Hamburger {
 	margin-left: -10px;
 	border: solid rgba(0, 0, 0, .05);
 	border-width: 0 0 0 10px;
+	-webkit-transition: -webkit-transform .3s;
 	transition: transform .3s;
 }
 /*hide the button when the menu is hidden too...*/
