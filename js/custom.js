@@ -36,6 +36,7 @@ jQuery(function ($) {
                 top: scrollTop
             });
             $('#Panel').css({
+                display: 'block',
                 top: scrollTop,
                 height: $window.height()
             });
@@ -63,6 +64,7 @@ jQuery(function ($) {
             e = e && e.preventDefault();
             var transitionend = function () {
                 menu.css({position: 'fixed', top: 0});
+                $('#Panel').css({display: 'none'});
             };
             setTimeout(transitionend, 450);
             $window.one('transitionend', transitionend);
