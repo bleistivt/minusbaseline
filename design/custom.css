@@ -34,7 +34,7 @@ body.HamburgerOpen {
 .BreadcrumbsWrapper,
 .DraftButton,
 .PreviewButton,
-.Profile #Panel .PhotoWrap,
+.Profile #Panel > .PhotoWrapLarge,
 #Head .SiteSearch,
 .MeBox .Flyout:before,
 .MeBox .Flyout:after {
