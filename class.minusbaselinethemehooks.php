@@ -1,66 +1,61 @@
-<?php if (!defined('APPLICATION')) exit();
+<?php
 
 class MinusBaselineThemeHooks implements Gdn_IPlugin {
 
-    public function Setup() {}
+    public function setup() {}
 
     //remove mobile-unfriendly plugins
-    public function Gdn_Dispatcher_AfterAnalyzeRequest_Handler($Sender) {
-        if (in_array($Sender->Application(), array('vanilla', 'conversations')) || ($Sender->Application() == 'dashboard' && in_array($Sender->Controller(), array('Activity', 'Profile', 'Search')))) {
-            Gdn::PluginManager()->RemoveMobileUnfriendlyPlugins();
+    public function gdn_dispatcher_afterAnalyzeRequest_handler($sender) {
+        $inPublicDashboard = $sender->application() == 'dashboard'
+            && in_array($sender->controller(), array('Activity', 'Profile', 'Search')); 
+        if (in_array($sender->application(), array('vanilla', 'conversations')) || $inPublicDashboard) { 
+            Gdn::pluginManager()->removeMobileUnfriendlyPlugins();
         }
-        SaveToConfig('Garden.Format.EmbedSize', '240x135', false);
+        saveToConfig('Garden.Format.EmbedSize', '240x135', false);
+        saveToConfig('Vanilla.AdminCheckboxes.Use', false, false);
 
         //the table discussions layout takes up too much space on small screens
-        SaveToConfig('Vanilla.Discussions.Layout', 'modern', false);
+        saveToConfig('Vanilla.Discussions.Layout', 'modern', false);
     }
 
-    public function Base_Render_Before($Sender) {
-        if ($Sender->MasterView == 'admin') return;
+    public function base_render_before($sender) {
+        if ($sender->MasterView == 'admin') return;
 
         //tell the browser this is a mobile style
-        $Sender->Head->AddTag('meta', array('name' => 'viewport', 'content' => "width=device-width,minimum-scale=1.0,maximum-scale=1.0"));
+        $sender->Head->addTag('meta', array(
+            'name' => 'viewport',
+            'content' => "width=device-width,minimum-scale=1.0,maximum-scale=1.0"
+        ));
 
         //position of the panel
-        $Sender->CssClass .= C('MinusBaseline.Panel.Left', false) ? ' PanelLeft' : ' PanelRight';
+        $sender->CssClass .= c('MinusBaseline.Panel.Left', false) ? ' PanelLeft' : ' PanelRight';
 
         //add the hamburger menu
-        $Sender->AddAsset('Content', Anchor('n', Url('#'), 'Hamburger'), 'Hamburger');
+        $sender->addAsset('Content', anchor('n', url('#'), 'Hamburger'), 'Hamburger');
 
         //add the searchbox to the panel
         //copied from library/vendors/SmartyPlugins/function.searchbox.php
-        $Form = Gdn::Factory('Form');
-        $Form->InputPrefix = '';
-        $Result =
-            $Form->Open(array('action' => Url('/search'), 'method' => 'get')).
-            $Form->TextBox('Search', array('placeholder' => T('SearchBoxPlaceHolder', 'Search'))).
-            $Form->Button('Go', array('Name' => '')).
-            $Form->Close();
-        $Result = Wrap($Result, 'div', array('class' => 'SiteSearch'));
-        $Sender->AddAsset('Panel', $Result, 'SearchBox');
+        $form = Gdn::factory('Form');
+        $form->InputPrefix = '';
+        $search = $form->Open(array('action' => Url('/search'), 'method' => 'get'))
+            .$form->TextBox('Search', array('placeholder' => T('SearchBoxPlaceHolder', 'Search')))
+            .$form->Button('Go', array('Name' => ''))
+            .$form->Close();
+        $search = wrap($search, 'div', array('class' => 'SiteSearch'));
+        $sender->addAsset('Panel', $search, 'SearchBox');
 
         //nomobile link to switch to the full site
-        $NoMobile = Gdn_Theme::Link(
+        $noMobile = Gdn_Theme::link(
             'profile/nomobile',
-            T("Full Site"),
-            Wrap('<a href="%url" class="%class">%text</a>', 'div', array('class' => 'NoMobile'))
+            t('Full Site'),
+            wrap('<a href="%url" class="%class">%text</a>', 'div', array('class' => 'NoMobile'))
         );
-        $Sender->AddAsset('Foot', $NoMobile, 'NoMobile');
-    }
-
-    //disable admincheckboxes
-    public function CategoriesController_Render_Before($Sender) {
-        SaveToConfig('Vanilla.AdminCheckboxes.Use', false, false);
-    }
-
-    public function DiscussionsController_Render_Before($Sender) {
-        SaveToConfig('Vanilla.AdminCheckboxes.Use', false, false);
+        $sender->addAsset('Foot', $noMobile, 'NoMobile');
     }
 
     //put the userphoto in the content area of profiles
-    public function ProfileController_BeforeUserInfo_Handler($Sender) {
-        $UserPhoto = new UserPhotoModule();
-        echo $UserPhoto->ToString();
+    public function profileController_beforeUserInfo_handler($sender) {
+        echo Gdn_Theme::module('UserPhotoModule');
     }
 
 }
