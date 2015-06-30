@@ -6,8 +6,8 @@ class MinusBaselineThemeHooks implements Gdn_IPlugin {
 
     //remove mobile-unfriendly plugins
     public function gdn_dispatcher_afterAnalyzeRequest_handler($sender) {
-        $inPublicDashboard = $sender->application() == 'dashboard'
-            && in_array($sender->controller(), array('Activity', 'Profile', 'Search')); 
+        $inPublicDashboard = in_array($sender->controller(), array('Activity', 'Profile', 'Search')); 
+
         if (in_array($sender->application(), array('vanilla', 'conversations')) || $inPublicDashboard) { 
             Gdn::pluginManager()->removeMobileUnfriendlyPlugins();
         }
@@ -37,10 +37,10 @@ class MinusBaselineThemeHooks implements Gdn_IPlugin {
         //copied from library/vendors/SmartyPlugins/function.searchbox.php
         $form = Gdn::factory('Form');
         $form->InputPrefix = '';
-        $search = $form->Open(array('action' => Url('/search'), 'method' => 'get'))
-            .$form->TextBox('Search', array('placeholder' => T('SearchBoxPlaceHolder', 'Search')))
-            .$form->Button('Go', array('Name' => ''))
-            .$form->Close();
+        $search = $form->open(array('action' => Url('/search'), 'method' => 'get'))
+            .$form->textBox('Search', array('placeholder' => T('SearchBoxPlaceHolder', 'Search')))
+            .$form->button('Go', array('Name' => ''))
+            .$form->close();
         $search = wrap($search, 'div', array('class' => 'SiteSearch'));
         $sender->addAsset('Panel', $search, 'SearchBox');
 
@@ -48,7 +48,7 @@ class MinusBaselineThemeHooks implements Gdn_IPlugin {
         $noMobile = Gdn_Theme::link(
             'profile/nomobile',
             t('Full Site'),
-            wrap('<a href="%url" class="%class">%text</a>', 'div', array('class' => 'NoMobile'))
+            '<div class="NoMobile"><a href="%url" class="%class">%text</a></div>'
         );
         $sender->addAsset('Foot', $noMobile, 'NoMobile');
     }
