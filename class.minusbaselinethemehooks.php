@@ -2,8 +2,6 @@
 
 class MinusBaselineThemeHooks implements Gdn_IPlugin {
 
-    public function setup() {}
-
     //remove mobile-unfriendly plugins
     public function gdn_dispatcher_afterAnalyzeRequest_handler($sender) {
         $inPublicDashboard = in_array($sender->controller(), array('Activity', 'Profile', 'Search')); 
@@ -41,21 +39,21 @@ class MinusBaselineThemeHooks implements Gdn_IPlugin {
             .$form->textBox('Search', array('placeholder' => T('SearchBoxPlaceHolder', 'Search')))
             .$form->button('Go', array('Name' => ''))
             .$form->close();
-        $search = wrap($search, 'div', array('class' => 'SiteSearch'));
-        $sender->addAsset('Panel', $search, 'SearchBox');
+        $sender->addAsset('Panel', wrap($search, 'div', array('class' => 'SiteSearch')), 'SearchBox');
 
         //nomobile link to switch to the full site
-        $noMobile = Gdn_Theme::link(
+        $sender->addAsset('Foot', Gdn_Theme::link(
             'profile/nomobile',
             t('Full Site'),
             '<div class="NoMobile"><a href="%url" class="%class">%text</a></div>'
-        );
-        $sender->addAsset('Foot', $noMobile, 'NoMobile');
+        ), 'NoMobile');
     }
 
     //put the userphoto in the content area of profiles
     public function profileController_beforeUserInfo_handler($sender) {
         echo Gdn_Theme::module('UserPhotoModule');
     }
+
+    public function setup() {}
 
 }
