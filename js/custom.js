@@ -1,5 +1,5 @@
 /*jslint browser: true */
-/*global jQuery*/
+/*global window, jQuery*/
 
 jQuery(function ($) {
     'use strict';
@@ -10,7 +10,7 @@ jQuery(function ($) {
         pushstate = window.history && window.history.pushState,
         //http://stackoverflow.com/a/17961266
         isAndroid = navigator.userAgent.indexOf('Android') >= 0,
-        webkitVer = parseInt((/WebKit\/([0-9]+)/.exec(navigator.appVersion) || 0)[1], 10) || undefined,
+        webkitVer = parseInt(/WebKit\/([0-9]+)/.exec(navigator.appVersion)[1], 10) || undefined,
         stockAndroid = isAndroid && webkitVer <= 534 && navigator.vendor.indexOf('Google') === 0,
         url = window.location.href,
         closeMenu,
@@ -96,47 +96,42 @@ jQuery(function ($) {
 
     //make the whole area of DiscussionList Items clickable
     $('ul.DataList.Discussions, ul.DataList.Itemlisten').on('click', 'li.Item', function (e) {
-        var href = $(this).find('.Title a').attr('href');
+        var href = $(e.currentTarget).find('.Title a').attr('href');
         if (!$(e.target).is('span.OptionsTitle, a, a.Bookmark, input, select, option') && href !== undefined) {
             document.location = href;
         }
     });
-    $('div.MeMenu').on('click', 'li.Item', function () {
-        var href = $(this).find('a:last').attr('href');
+    $('div.MeMenu').on('click', 'li.Item', function (e) {
+        var href = $(e.currentTarget).find('a:last').attr('href');
         if (href !== undefined) {
             document.location = href;
         }
     });
 
     //create select lists for flyout menus
-    change = function () {
-        var link = $('option:selected', this).data('a');
+    change = function (e) {
+        var link = $('option:selected', e.currentTarget).data('a');
         if (link) {
             link.click();
         }
-        this.selectedIndex = -1;
+        e.currentTarget.selectedIndex = -1;
     };
 
     transformFlyouts = function () {
-        var flyouts, i, items, select, j;
-
-        flyouts = $('#Content .ToggleFlyout');
-        for (i = 0; i < flyouts.length; i += 1) {
+        $('#Content .ToggleFlyout').each(function (ignore, element) {
             //skip already transformed flyouts
-            flyouts[i] = $(flyouts[i]);
+            var flyout = $(element),
+                select;
 
-            if (!flyouts[i].data('hasselectlist')) {
-                flyouts[i].data('hasselectlist', true);
-
-                //grab all the links
-                items = $('ul.MenuItems a', flyouts[i]);
+            if (!flyout.data('hasselectlist')) {
+                flyout.data('hasselectlist', true);
 
                 //create a selectlist
                 select = $('<select/>').css({
                     position: 'absolute',
                     left: 0,
                     opacity: 0
-                }).appendTo(flyouts[i]);
+                }).appendTo(flyout);
 
                 //add a dummy option for old stock android browser
                 if (stockAndroid) {
@@ -144,20 +139,20 @@ jQuery(function ($) {
                 }
 
                 //extract the text and the url
-                for (j = 0; j < items.length; j += 1) {
+                $('ul.MenuItems a', flyout).each(function (ignore, element) {
                     select.append(
                         $('<option/>')
-                            .data('a', items[j])
-                            .text(items[j].text)
+                            .data('a', element)
+                            .text(element.text)
                     );
-                }
+                });
                 //deselect the first (default) option
                 select[0].selectedIndex = -1;
 
                 //simulate a click on change
                 select.change(change);
             }
-        }
+        });
     };
     transformFlyouts();
 
