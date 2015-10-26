@@ -36,7 +36,7 @@ class MinusBaselineThemeHooks implements Gdn_IPlugin {
         $form = Gdn::factory('Form');
         $form->InputPrefix = '';
         $search = $form->open(array('action' => Url('/search'), 'method' => 'get'))
-            .$form->textBox('Search', array('placeholder' => T('SearchBoxPlaceHolder', 'Search')))
+            .$form->textBox('Search', array('placeholder' => t('SearchBoxPlaceHolder', 'Search')))
             .$form->button('Go', array('Name' => ''))
             .$form->close();
         $sender->addAsset('Panel', wrap($search, 'div', array('class' => 'SiteSearch')), 'SearchBox');
