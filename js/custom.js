@@ -156,6 +156,6 @@ jQuery(function ($) {
     };
     transformFlyouts();
 
-    $(document).on('CommentAdded CommentPagingComplete', transformFlyouts);
+    $(document).on('CommentAdded CommentEditingComplete CommentPagingComplete', transformFlyouts);
 
 });
