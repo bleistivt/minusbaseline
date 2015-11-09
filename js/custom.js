@@ -82,13 +82,13 @@ jQuery(function ($) {
 
     //make the back button close the menu
     if (pushstate) {
-        $(window).on('popstate', function () {
+        $window.on('popstate', function () {
             closeMenu(null, false);
         });
     }
 
     //clear up the history when a link was clicked while the menu is open
-    $(window).on('beforeunload', function () {
+    $window.on('beforeunload', function () {
         if (body.hasClass('HamburgerOpen')) {
             window.history.replaceState({}, '', url);
         }
