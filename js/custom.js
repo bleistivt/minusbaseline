@@ -112,7 +112,7 @@ jQuery(function ($) {
     change = function (e) {
         var link = $('option:selected', e.currentTarget).data('a');
         if (link) {
-            $(link).click();
+            link.click ? link.click() : window.location.assign($(link).attr('href'));
         }
         e.currentTarget.selectedIndex = -1;
     };
