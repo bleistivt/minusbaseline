@@ -10,7 +10,7 @@ jQuery(function ($) {
         pushstate = window.history && window.history.pushState,
         //http://stackoverflow.com/a/17961266
         isAndroid = navigator.userAgent.indexOf('Android') >= 0,
-        webkitVer = parseInt(/WebKit\/([0-9]+)/.exec(navigator.appVersion)[1], 10) || undefined,
+        webkitVer = parseInt((/WebKit\/([0-9]+)/.exec(navigator.appVersion) || 0)[1], 10) || undefined,
         stockAndroid = isAndroid && webkitVer <= 534 && navigator.vendor.indexOf('Google') === 0,
         url = window.location.href,
         closeMenu,
