@@ -24,9 +24,7 @@ jQuery(function ($) {
     }
 
     //toggle the menuopen class when the hamburger is clicked
-    menu.click(function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    menu.click(function () {
         if (body.hasClass('HamburgerOpen')) {
             closeMenu();
         } else {
@@ -56,12 +54,15 @@ jQuery(function ($) {
                 }, 150);
             }
         }
+        return false;
     });
 
     //close the menu when the user tries to interact with the rest of the page
     closeMenu = function (e, back) {
         if (body.hasClass('HamburgerOpen')) {
-            e = e && e.preventDefault();
+            if (e) {
+                e.preventDefault();
+            }
             var transitionend = function () {
                 menu.css({position: 'fixed', top: 0});
                 $('#Panel').css({display: 'none'});
