@@ -34,7 +34,6 @@ class MinusBaselineThemeHooks implements Gdn_IPlugin {
         //add the searchbox to the panel
         //copied from library/vendors/SmartyPlugins/function.searchbox.php
         $form = Gdn::factory('Form');
-        $form->InputPrefix = '';
         $search = $form->open(array('action' => Url('/search'), 'method' => 'get'))
             .$form->textBox('Search', array('placeholder' => t('SearchBoxPlaceHolder', 'Search')))
             .$form->button('Go', array('Name' => ''))
