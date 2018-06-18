@@ -119,9 +119,9 @@ jQuery(function ($) {
     };
 
     transformFlyouts = function () {
-        $('#Content .ToggleFlyout').each(function (ignore, element) {
+        $('#Content .ToggleFlyout, .ButtonGroup, .MeMenu .ToggleFlyout:last').each(function (ignore, element) {
             //skip already transformed flyouts
-            var flyout = $(element),
+            var flyout = $(element).css('position', 'relative'),
                 select;
 
             if (!flyout.data('hasselectlist')) {
@@ -131,6 +131,7 @@ jQuery(function ($) {
                 select = $('<select/>').css({
                     position: 'absolute',
                     left: 0,
+                    top: 0,
                     opacity: 0
                 }).appendTo(flyout);
 
