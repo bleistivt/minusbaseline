@@ -1,0 +1,15 @@
+{
+    "name": "MinusBaseline",
+    "description": "A mobile theme based on the default.",
+    "version": "1.0.3",
+    "license": "GNU GPL2",
+    "gitHub": "bleistivt/minusbaseline",
+    "key": "minusbaseline",
+    "type": "theme",
+    "authors": [
+        {
+            "name": "Bleistivt",
+            "homepage": "http://bleistivt.net"
+        }
+    ]
+}
