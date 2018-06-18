@@ -147,6 +147,7 @@ a.Hamburger {
 	transition: transform .3s;
 }
 /*hide the button when the menu is hidden too...*/
+body.embed .Hamburger,
 body.NoPanel .Hamburger,
 body.Entry .Hamburger,
 body.Conversations.add .Hamburger,
