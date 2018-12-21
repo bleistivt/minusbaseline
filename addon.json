@@ -5,6 +5,7 @@
     "license": "GNU GPL2",
     "gitHub": "bleistivt/minusbaseline",
     "key": "minusbaseline",
+    "isMobile": true,
     "type": "theme",
     "authors": [
         {
