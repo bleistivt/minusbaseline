@@ -12,6 +12,7 @@ jQuery(function ($) {
         isAndroid = navigator.userAgent.indexOf('Android') >= 0,
         webkitVer = parseInt((/WebKit\/([0-9]+)/.exec(navigator.appVersion) || [0, NaN])[1], 10),
         stockAndroid = isAndroid && webkitVer <= 534 && navigator.vendor.indexOf('Google') === 0,
+        iOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent),
         url = window.location.href,
         closeMenu,
         change,
@@ -136,7 +137,7 @@ jQuery(function ($) {
                 }).appendTo(flyout);
 
                 //add a dummy option for old stock android browser
-                if (stockAndroid) {
+                if (stockAndroid || iOS) {
                     select.append('<option>...</option>');
                 }
 
