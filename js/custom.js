@@ -1,22 +1,19 @@
 /*jslint browser: true */
 /*global window, jQuery*/
 
-jQuery(function ($) {
-    'use strict';
+jQuery(($) => {
+    const $window = $(window);
+    const body = $('body');
+    const menu = $('a.Hamburger');
+    const pushstate = window.history && window.history.pushState;
 
-    var $window = $(window),
-        body = $('body'),
-        menu = $('a.Hamburger'),
-        pushstate = window.history && window.history.pushState,
-        //http://stackoverflow.com/a/17961266
-        isAndroid = navigator.userAgent.indexOf('Android') >= 0,
-        webkitVer = parseInt((/WebKit\/([0-9]+)/.exec(navigator.appVersion) || [0, NaN])[1], 10),
-        stockAndroid = isAndroid && webkitVer <= 534 && navigator.vendor.indexOf('Google') === 0,
-        iOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent),
-        url = window.location.href,
-        closeMenu,
-        change,
-        transformFlyouts;
+    //http://stackoverflow.com/a/17961266
+    const isAndroid = navigator.userAgent.includes('Android');
+
+    const webkitVer = parseInt((/WebKit\/([0-9]+)/.exec(navigator.appVersion) || [0, NaN])[1], 10);
+    const stockAndroid = isAndroid && webkitVer <= 534 && navigator.vendor.indexOf('Google') === 0;
+    const iOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+    let url = window.location.href;
 
     //remove the menu hash on the initial pageload
     if (pushstate && window.location.hash === '#menu') {
@@ -24,12 +21,33 @@ jQuery(function ($) {
         window.history.replaceState({}, '', url);
     }
 
+    //close the menu when the user tries to interact with the rest of the page
+    const closeMenu = (e, back) => {
+        if (body.hasClass('HamburgerOpen')) {
+            if (e) {
+                e.preventDefault();
+            }
+            const transitionend = () => {
+                menu.css({position: 'fixed', top: 0});
+                $('#Panel').css({display: 'none'});
+            };
+            setTimeout(transitionend, 450);
+            $window.one('transitionend', transitionend);
+            body.removeClass('HamburgerOpen');
+
+            if (pushstate && back !== false) {
+                window.history.back();
+            }
+        }
+        $window.scrollLeft(0);
+    };
+
     //toggle the menuopen class when the hamburger is clicked
-    menu.click(function () {
+    menu.click(() => {
         if (body.hasClass('HamburgerOpen')) {
             closeMenu();
         } else {
-            var scrollTop = $window.scrollTop();
+            const scrollTop = $window.scrollTop();
             menu.css({
                 position: 'absolute',
                 top: scrollTop
@@ -48,7 +66,7 @@ jQuery(function ($) {
 
                 //this prevents a chrome bug where the page is scrolled to the top after pushState
                 //see https://code.google.com/p/chromium/issues/detail?id=399971
-                setTimeout(function () {
+                setTimeout(() => {
                     if ($window.scrollTop() !== scrollTop) {
                         $window.scrollTop(scrollTop);
                     }
@@ -58,72 +76,52 @@ jQuery(function ($) {
         return false;
     });
 
-    //close the menu when the user tries to interact with the rest of the page
-    closeMenu = function (e, back) {
-        if (body.hasClass('HamburgerOpen')) {
-            if (e) {
-                e.preventDefault();
-            }
-            var transitionend = function () {
-                menu.css({position: 'fixed', top: 0});
-                $('#Panel').css({display: 'none'});
-            };
-            setTimeout(transitionend, 450);
-            $window.one('transitionend', transitionend);
-            body.removeClass('HamburgerOpen');
-
-            if (pushstate && back !== false) {
-                window.history.back();
-            }
-        }
-        $window.scrollLeft(0);
-    };
-
     $('#Content, #Head').on('touchstart', closeMenu);
     $window.on('orientationchange', closeMenu);
 
     //make the back button close the menu
     if (pushstate) {
-        $window.on('popstate', function () {
+        $window.on('popstate', () => {
             closeMenu(null, false);
         });
     }
 
     //clear up the history when a link was clicked while the menu is open
-    $window.on('beforeunload', function () {
+    $window.on('beforeunload', () => {
         if (body.hasClass('HamburgerOpen')) {
             window.history.replaceState({}, '', url);
         }
     });
 
     //make the whole area of DiscussionList Items clickable
-    $('ul.DataList.Discussions, ul.DataList.Itemlisten').on('click', 'li.Item', function (e) {
-        var href = $(e.currentTarget).find('.Title a').attr('href');
-        if (!$(e.target).is('span.OptionsTitle, a, a.Bookmark, input, select, option') && href !== undefined) {
+    $('ul.DataList.Discussions, ul.DataList.Itemlisten').on('click', 'li.Item', ({currentTarget, target}) => {
+        const href = $(currentTarget).find('.Title a').attr('href');
+        if (!$(target).is('span.OptionsTitle, a, a.Bookmark, input, select, option') && href !== undefined) {
             document.location = href;
         }
     });
-    $('div.MeMenu').on('click', 'li.Item', function (e) {
-        var href = $(e.currentTarget).find('a:last').attr('href');
+    $('div.MeMenu').on('click', 'li.Item', ({currentTarget}) => {
+        const href = $(currentTarget).find('a:last').attr('href');
         if (href !== undefined) {
             document.location = href;
         }
     });
 
     //create select lists for flyout menus
-    change = function (e) {
-        var link = $('option:selected', e.currentTarget).data('a');
+    const change = ({currentTarget}) => {
+        const link = $('option:selected', currentTarget).data('a');
         if (link) {
             link.click ? link.click() : window.location.assign($(link).attr('href'));
         }
-        e.currentTarget.selectedIndex = -1;
+        currentTarget.selectedIndex = -1;
     };
 
-    transformFlyouts = function () {
-        $('#Content .ToggleFlyout, .ButtonGroup, .MeMenu .ToggleFlyout:last').each(function (ignore, element) {
+    const transformFlyouts = () => {
+        $('#Content .ToggleFlyout, .ButtonGroup, .MeMenu .ToggleFlyout:last').each((ignore, element) => {
             //skip already transformed flyouts
-            var flyout = $(element).css('position', 'relative'),
-                select;
+            const flyout = $(element).css('position', 'relative');
+
+            let select;
 
             if (!flyout.data('hasselectlist')) {
                 flyout.data('hasselectlist', true);
@@ -142,7 +140,7 @@ jQuery(function ($) {
                 }
 
                 //extract the text and the url
-                $('ul.MenuItems a', flyout).each(function (ignore, element) {
+                $('ul.MenuItems a', flyout).each((ignore, element) => {
                     select.append(
                         $('<option/>')
                             .data('a', element)
@@ -160,5 +158,4 @@ jQuery(function ($) {
     transformFlyouts();
 
     $(document).on('CommentAdded CommentEditingComplete CommentPagingComplete', transformFlyouts);
-
 });
